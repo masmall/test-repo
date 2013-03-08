@@ -1,0 +1,123 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.pro.lang</groupId>
+  <artifactId>pro</artifactId>
+  <version>.01</version>
+  <packaging>jar</packaging>
+
+  <name>pro</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <property name="cpd.minimum.tokens" value="50"/>
+    <property name="cpd.ignore.literals" value="true"/>
+    <property name="cpd.ignore.identifiers" value="true"/>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.5.1</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+          <compilerArgument>-Xlint:all</compilerArgument>
+          <showWarnings>true</showWarnings>
+          <showDeprecation>true</showDeprecation>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.atlassian.maven.plugins</groupId>
+        <artifactId>maven-clover2-plugin</artifactId>
+        <version>3.1.6</version>
+      	<configuration>
+      	  <generateHtml>true</generateHtml>
+      	  <generateXml>true</generateXml>
+      	</configuration>
+      </plugin>
+      <!--plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+      	<artifactId>maven-clover-plugin</artifactId>
+      	<version>2.4</version>
+      	<configuration>
+      	  <generateHtml>true</generateHtml>
+      	  <generateXml>true</generateXml>
+      	</configuration>
+      	<executions>
+      	  <execution>
+      	  	<phase>verify</phase>
+      	    <goals>
+      	      <goal>instrument</goal>
+      	    </goals>
+      	  </execution>
+      	</executions>
+      </plugin-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <formats>
+                        <format>xml</format>
+                    </formats>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>cobertura</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+    </plugins>
+  </build>
+  
+  <reporting>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>findbugs-maven-plugin</artifactId>
+          <version>2.4.0</version>
+          <configuration>
+            <xmlOutput>true</xmlOutput>
+            <!-- Optional directory to put findbugs xdoc xml report -->
+            <xmlOutputDirectory>target/site</xmlOutputDirectory>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>2.9.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-pmd-plugin</artifactId>
+          <version>2.7.1</version>
+          <configuration>
+            <targetJdk>1.5</targetJdk>
+            <goal>pmd</goal>
+            <goal>cpd</goal>
+            <minimumTokens>10</minimumTokens>
+            <ignoreIdentifiers>true</ignoreIdentifiers>
+            <ignoreLiterals>true</ignoreLiterals>
+          </configuration>
+        </plugin>
+      </plugins>
+    </reporting>
+  
+</project>
